@@ -68,17 +68,6 @@
         "default": "#000000",
         "title": "숍 포인트 글자색"
       },
-      "shop_display_status": {
-        "group": "shop",
-        "type": "select",
-        "options": [
-          "on",
-          "off"
-        ],
-        "default": "on",
-        "title": "숍 상품 노출하기",
-        "description": "사이트에서 숍 목록을 표시하려면 on 으로 활성화 하세요."
-      },
       "shop_posts_per_page": {
         "group": "shop",
         "type": "select",
