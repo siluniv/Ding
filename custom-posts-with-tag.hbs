@@ -1,0 +1,42 @@
+{{!< default}}
+
+{{#post}}
+{{#get "tags" filter="slug:[{{slug}}]" limit=1}}
+{{#if tags}}
+  {{#foreach tags}}
+<div class="n-archive__wrap">
+  <div class="n-container mx-auto">
+    <h1 class="c-archive__title">{{name}}</h1>
+  </div>
+</div>
+  {{/foreach}}
+{{/if}}
+{{/get}}
+
+{{#match slug "=" "curriculum"}}
+<div class="n-archive-category__wrap">
+  <div class="n-container mx-auto">
+    <div class="n-archive-category__list">
+      <ul class="o-plain-list">
+        {{navigation type="secondary"}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{/match}}
+
+{{#get "posts" filter="tag:[{{slug}}]" include="tags,authors" order="published_at desc"}}
+  {{#if posts}}
+<div class="n-container mx-auto">
+  <div class="n-archive__list js-grid">
+  {{#foreach posts}}
+    {{> post-card }}
+  {{/foreach}}
+  </div>
+  <div class="n-archive__load">
+    {{ pagination }}
+  </div>
+</div>
+  {{/if}}
+{{/get}}
+{{/post}}

@@ -1,0 +1,113 @@
+{{!< default}}
+
+{{#post}}
+{{#get "tags" filter="slug:[{{slug}}]" limit=1}}
+{{#if tags}}
+  {{#foreach tags}}
+<div class="n-archive__wrap">
+  <div class="n-container mx-auto">
+    <h1 class="c-archive__title">{{name}}</h1>
+  </div>
+</div>
+  {{/foreach}}
+{{/if}}
+{{/get}}
+
+{{!-- 커리큘럼에만 표시해주기 --}}
+{{#match slug "=" "curriculum"}}
+<div class="n-archive-category__wrap">
+  <div class="n-container n-container__responsive mx-auto">
+    <div class="n-archive-category__list">
+      <ul class="o-plain-list">
+        {{navigation type="secondary"}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{else match slug "=" "economy"}}
+<div class="n-archive-category__wrap">
+  <div class="n-container mx-auto">
+    <div class="n-archive-category__list">
+      <ul class="o-plain-list">
+        {{navigation type="secondary"}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{else match slug "=" "international"}}
+<div class="n-archive-category__wrap">
+  <div class="n-container mx-auto">
+    <div class="n-archive-category__list">
+      <ul class="o-plain-list">
+        {{navigation type="secondary"}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{else match slug "=" "people"}}
+<div class="n-archive-category__wrap">
+  <div class="n-container mx-auto">
+    <div class="n-archive-category__list">
+      <ul class="o-plain-list">
+        {{navigation type="secondary"}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{else match slug "=" "archives"}}
+<div class="n-archive-category__wrap">
+  <div class="n-container mx-auto">
+    <div class="n-archive-category__list">
+      <ul class="o-plain-list">
+        {{navigation type="secondary"}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{else match slug "=" "3minutes"}}
+<div class="n-archive-category__wrap">
+  <div class="n-container mx-auto">
+    <div class="n-archive-category__list">
+      <ul class="o-plain-list">
+        {{navigation type="secondary"}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{else match slug "=" "culture"}}
+<div class="n-archive-category__wrap">
+  <div class="n-container mx-auto">
+    <div class="n-archive-category__list">
+      <ul class="o-plain-list">
+        {{navigation type="secondary"}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{else}}
+{{/match}}
+
+<div class="n-archive-tab__wrap">
+  <div class="n-container n-container__responsive mx-auto">
+    <div class="n-archive-tab">
+      <div class="n-archive-tab__item"><a class="n-archive-tab__item--link dingding-content dingding-post-ajax active" data-slug="{{slug}}" href="/{{slug}}/">콘텐츠</a></div>
+      <div class="n-archive-tab__item"><a class="n-archive-tab__item--link dingding-shop-ajax" data-slug="{{slug}}" href="#">스토어</a></div>
+    </div>
+  </div>
+</div>
+
+{{#get "posts" filter="tag:[{{slug}}]" include="tags,authors" limit=@custom.shop_posts_per_page order="published_at desc"}}
+  {{#if posts}}
+<div class="n-container n-container__responsive mx-auto n-archive__list--wrap">
+  <div class="n-archive__list js-grid">
+  {{#foreach posts}}
+    {{> post-card }}
+  {{/foreach}}
+  </div>
+  <div class="n-archive__load">
+    {{ pagination }}
+  </div>
+</div>
+  {{/if}}
+{{/get}}
+{{/post}}

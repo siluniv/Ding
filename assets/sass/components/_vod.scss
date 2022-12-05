@@ -1,0 +1,165 @@
+.n-vod {
+  &-container {
+
+    // &.n-vod-container__side {
+    //   display: grid;
+    //   grid-template-columns: repeat(4, 1fr);
+    //   column-gap: 32px;
+
+    //   .n-vod-watch__wrap {
+    //     grid-column-start: 1;
+    //     grid-column-end: 4;
+    //   }
+    // }
+  }
+}
+
+.n-vod-watch {
+  &__wrap {
+    background-color: #2F3659;
+    @include mq($from: tablet) {
+      padding: 56px 0 20px 0;
+    }
+  }
+}
+
+.n-vod-playlist {
+  &__wrap {
+    background-color: #0D1438;
+    padding: 32px 0;
+  }
+}
+
+.n-vod-player {
+  margin-bottom: 16px;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 9;
+
+    background-color: #000;
+  }
+}
+
+.n-vod-info {
+  @include mq($until: tablet) {
+    padding: 32px 0;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: -0.02;
+
+    color: #fff;
+    margin-bottom: 16px;
+
+    @include mq($from: tablet) {
+      max-width: 60%;
+    }
+  }
+
+  &__tags {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: -0.02;
+    color: #5E96FF;
+
+    margin-bottom: 12px;
+  }
+
+  &__date {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: -0.02;
+
+    color: #a3a3a3;
+  }
+}
+
+.n-vod-playlist {
+  ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+
+  &__label {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: -0.02;
+
+    margin-bottom: 16px;
+    color: #5E96FF;
+
+    @include mq($from: tablet) {
+      text-align: center;
+    }
+  }
+
+  &__item {
+
+    display: flex;
+    justify-items: center;
+    column-gap: 16px;
+
+    &--title {
+      flex-grow: 1;
+      color: #fff;
+      opacity: 0.5;
+      display: flex;
+      align-items: center;
+      column-gap: 12px;
+
+
+    }
+
+    &--index {
+      width: 12px;
+      flex-shrink: 0;
+    }
+
+    &--text {
+      flex-grow: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      word-break: break-all;
+    }
+
+    &--progress {
+      flex-shrink: 0;
+      width: 87px;
+      flex-basis: 87px;
+      display: flex;
+      align-items: center;
+
+      &-container {
+        height: 5px;
+        width: 100%;
+        background-color: #525784;
+        display: flex;
+        align-items: center;
+      }
+
+      &-bar {
+        height: 5px;
+        width: 0;
+        background-color: #8DA6FF;
+      }
+    }
+
+    &.n-vod-playlist__item--current {
+      .n-vod-playlist__item--title {
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -1,0 +1,145 @@
+.n-books {
+  color: #fff;
+  background-color: #9092AC;
+  padding: 32px 0;
+
+  &__list {
+    position: relative;
+
+    .swiper-button-prev, .swiper-button-next {
+      display: none;
+      top: 40%;
+      width: 18px;
+
+      @include mq($from: tablet) {
+        display: block;
+      }
+
+      svg {
+        fill: #fff;
+        height: 32px;
+        width: 18px;
+      }
+
+      &:after {
+        display: none;
+      }
+
+    }
+
+    .swiper-button-prev {
+      left: -46px;
+    }
+
+    .swiper-button-next {
+      right: -46px;
+    }
+  }
+
+  &__label {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: -0.02;
+
+    margin-bottom: 26px;
+
+    a {
+      display: flex;
+      align-items: center;
+      column-gap: 12px;
+    }
+  }
+
+  &__swiper {
+    overflow: hidden;
+    padding: 0 16px;
+
+    @include mq($from: tablet) {
+      padding: 0;
+    }
+
+    .swiper-wrapper {
+      height: 600px;
+
+      @include mq($from: tablet) {
+        height: auto;
+      }
+    }
+
+    .swiper-slide {
+      height: 273px;
+
+      @include mq($from: tablet) {
+        height: auto;
+      }
+    }
+
+    .swiper-pagination-bullet {
+      background-color: #E6E6E6;
+      opacity: 1;
+
+      &-active {
+        background-color: #FEE14A;
+      }
+    }
+  }
+}
+
+.n-books-item {
+  &__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3 / 4.2;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    margin-bottom: 14px;
+  }
+
+  &__content {
+
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: -0.02;
+    margin-bottom: 4px;
+
+    a {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+    }
+  }
+
+  &__author {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: -0.02;
+
+    color: #FFCE52;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+  }
+}

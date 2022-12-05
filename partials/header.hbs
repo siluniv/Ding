@@ -1,0 +1,111 @@
+<header class='js-header c-header'>
+  <div class='o-grid o-grid--center'>
+    <div class='o-grid__col position--relative'>
+
+      <div class="c-header__with--searchbar">
+        <div class='c-logo'>
+          {{#if @site.logo}}
+            <a class="light" href='{{ @site.url }}'>
+              <img class='c-logo__img' src='{{ @site.logo }}' alt='{{ @site.title }}'>
+            </a>
+          {{else}}
+            <a class='light c-logo__default' href='{{ @site.url }}'>{{ @site.title }}</a>
+          {{/if}}
+          {{#if @site.logo_sub}}
+            <a class="dark" href='{{ @site.url }}'>
+              <img class='c-logo__img' src='{{ @site.logo_sub }}' alt='{{ @site.title }}'>
+            </a>
+          {{else}}
+            <a class='dark c-logo__default' href='{{ @site.url }}'>{{ @site.title }}</a>
+          {{/if}}
+        </div>
+        <div class="search-bar">
+          {{bluedot_search_button color="--text" size="13"}}
+        </div>
+      </div>
+
+      <div class='js-nav-toggle c-nav-toggle'>
+        <span class='c-nav-toggle__icon'></span>
+      </div>
+
+      <div class="console-nav">
+        <ul class="console-nav__list o-plain-list">
+        {{#if @member}}
+          <li class="console-nav__item"><a href="{{ @site.url }}/account/" data-portal="account" class='c-nav__link'>{{t 'Account' }}</a></li>
+          <li class="console-nav__item"><a href='#signout' class='c-nav__link' data-members-signout>{{t 'Log out' }}</a></li>
+          {{#if @price.use}}
+            {{#unless @member.paid}}
+                <li class="console-nav__item"><a href='{{ @site.url }}/membership/' class='c-nav__link'>{{t 'Subscribe' }}</a></li>
+            {{/unless}}
+          {{/if}}
+        {{else}}
+          <li class="console-nav__item"><a href='{{ @site.url }}/signin/' class='c-nav__link'>{{t 'Log in' }}</a></li>
+          <li class="console-nav__item"><a href='{{ @site.url }}/membership/' class='c-nav__link'>{{t 'Subscribe' }}</a></li>
+        {{/if}}
+          <li class="console-nav__item">
+            <button class='c-nav__link c-color-mode-btn js-mode-toggle js-mode-toggle-title' title='{{t 'Enable dark mode' }}'>
+              <span class='u-hidden-visually js-mode-toggle-text'>{{t 'Enable dark mode' }}</span>
+              <span class='c-color-mode-btn__icon' aria-hidden='true'></span>
+            </button>
+          </li>
+          {{#if @custom.social_youtube}}
+          <li class="console-nav__item">
+            <a href='{{ @custom.social_youtube }}' target="_blank" class="c-nav__link console-nav__social console-nav__social--youtube">
+              <svg width="23" height="16" viewBox="0 0 23 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.5261 2.50369C22.3947 2.0213 22.1384 1.58152 21.7828 1.22811C21.4271 0.874702 20.9846 0.619982 20.4991 0.4893C18.7004 1.02257e-07 11.4998 0 11.4998 0C11.4998 0 4.30054 1.56794e-06 2.50083 0.470716C1.5346 0.73413 0.738161 1.52473 0.473761 2.50369C-6.86126e-08 4.29183 0 8 0 8C0 8 -6.86126e-08 11.7271 0.473761 13.4963C0.605367 13.9786 0.861711 14.4183 1.21732 14.7717C1.57293 15.1251 2.01542 15.3799 2.50083 15.5107C4.31961 16 11.5001 16 11.5001 16C11.5001 16 18.6994 16 20.4991 15.5293C20.9846 15.3986 21.4271 15.144 21.7828 14.7906C22.1385 14.4373 22.3949 13.9976 22.5265 13.5153C22.9999 11.7282 22.9999 8.01894 22.9999 8.01894C22.9999 8.01894 23.019 4.29183 22.5261 2.50369ZM9.20759 11.4258V4.57419L15.1945 8L9.20759 11.4258Z" fill="white"/>
+              </svg>
+              <span>YouTube</span>
+            </a>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class='o-grid o-grid--center'>
+    <div class="o-grid__col">
+      <nav class="c-nav-wrap nav-wrap">
+        <ul class="nav o-plain-list">
+          {{ navigation }}
+        </ul>
+        <div class="nav__mobile--wrap">
+          <div class="search-bar">
+            {{bluedot_search_button color="--text" size="13"}}
+          </div>
+          <div class="console-nav">
+            <ul class="console-nav__list o-plain-list">
+            {{#if @member}}
+              <li class="console-nav__item"><a href="{{ @site.url }}/account/" data-portal="account" class='c-nav__link'>{{t 'Account' }}</a></li>
+              <li class="console-nav__item"><a href='#signout' class='c-nav__link' data-members-signout>{{t 'Log out' }}</a></li>
+              {{#if @price.use}}
+                {{#unless @member.paid}}
+                    <li class="console-nav__item"><a href='{{ @site.url }}/membership/' class='c-nav__link'>{{t 'Subscribe' }}</a></li>
+                {{/unless}}
+              {{/if}}
+            {{else}}
+              <li class="console-nav__item"><a href='{{ @site.url }}/signin/' class='c-nav__link'>{{t 'Log in' }}</a></li>
+              <li class="console-nav__item"><a href='{{ @site.url }}/membership/' class='c-nav__link'>{{t 'Subscribe' }}</a></li>
+            {{/if}}
+            {{#if @custom.social_youtube}}
+              <li class="console-nav__item">
+                <a href='{{ custom.social_youtube }}' target="_blank" class="c-nav__link console-nav__social console-nav__social--youtube">
+                  <svg width="23" height="16" viewBox="0 0 23 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.5261 2.50369C22.3947 2.0213 22.1384 1.58152 21.7828 1.22811C21.4271 0.874702 20.9846 0.619982 20.4991 0.4893C18.7004 1.02257e-07 11.4998 0 11.4998 0C11.4998 0 4.30054 1.56794e-06 2.50083 0.470716C1.5346 0.73413 0.738161 1.52473 0.473761 2.50369C-6.86126e-08 4.29183 0 8 0 8C0 8 -6.86126e-08 11.7271 0.473761 13.4963C0.605367 13.9786 0.861711 14.4183 1.21732 14.7717C1.57293 15.1251 2.01542 15.3799 2.50083 15.5107C4.31961 16 11.5001 16 11.5001 16C11.5001 16 18.6994 16 20.4991 15.5293C20.9846 15.3986 21.4271 15.144 21.7828 14.7906C22.1385 14.4373 22.3949 13.9976 22.5265 13.5153C22.9999 11.7282 22.9999 8.01894 22.9999 8.01894C22.9999 8.01894 23.019 4.29183 22.5261 2.50369ZM9.20759 11.4258V4.57419L15.1945 8L9.20759 11.4258Z" fill="white"/>
+                  </svg>
+                  <span>YouTube</span>
+                </a>
+              </li>
+            {{/if}}
+            </ul>
+          </div>
+          <div class="nav__mobile">
+            <ul class="o-plain-list">
+              {{ navigation }}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>

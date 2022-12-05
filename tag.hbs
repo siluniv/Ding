@@ -1,0 +1,59 @@
+{{!< default}}
+
+{{#tag}}
+{{#match slug "=" "live"}}
+
+{{#get "posts" limit=1 filter="featured:true+tag:[live]"}}
+{{#if posts}}
+  {{#foreach posts}}
+<div class="n-featured n-featured__live">
+  <div class="n-container mx-auto">
+    <div class="n-featured__live--wrap">
+
+      <div class="n-featured__live--content">
+        <div class="n-featured__live--badge">
+          <img src="{{asset "img/icon/live.png"}}" alt="">
+        </div>
+        <div class="n-featured__live--text">
+          <h1 class="n-featured__live--title">
+            <a href="{{url}}">{{title}}</a>
+          </h1>
+          <p class="n-featured__live--excerpt">{{ excerpt }}</p>
+        </div>
+        <div class="n-featured__live--action">
+          <a href="{{url}}">바로가기</a>
+        </div>
+      </div>
+      <div class="n-featured__live--media">
+        <a href="{{ url }}">
+        {{#if feature_image}}
+          <img class="n-post-card__image lazyload" src="{{ img_url feature_image size="lg"}}" alt="{{#if feature_image_alt}}{{ feature_image_alt }}{{ else }}{{ title }}{{/if}}">
+        {{/if}}
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  {{/foreach}}
+{{/if}}
+{{/get}}
+
+{{else}}
+<div class="n-archive__wrap">
+  <div class="n-container mx-auto">
+    <h1 class="c-archive__title">{{ name }}</h1>
+  </div>
+</div>
+{{/match}}
+{{/tag}}
+
+<div class="n-container mx-auto">
+  <div class="n-archive__list js-grid">
+    {{> loop }}
+  </div>
+  <div class="n-archive__load">
+    {{ pagination }}
+  </div>
+</div>

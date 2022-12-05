@@ -1,0 +1,70 @@
+/*------------------------------------*\
+  Components > Header
+\*------------------------------------*/
+
+.c-header {
+  padding: 14px 0 15px 0;
+  height: 61px;
+  background-color: var(--color-white);
+  z-index: 10;
+
+  @include mq($from: tablet) {
+    height: 135px;
+    padding: 22px 0 21px 0;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &__with {
+    &--searchbar {
+      display: flex;
+      column-gap: 36px;
+      align-items: flex-end;
+    }
+  }
+}
+
+.js-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2000;
+  will-change: transform;
+  transition: transform $global-transition ease;
+
+  &--pinned {
+    transform: translateY(0);
+    backdrop-filter: saturate(180%) blur(20px);
+    background-color: var(--bg-transparent);
+
+    &.js-header--not-top {
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+      box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
+    }
+
+    @-moz-document url-prefix() {
+      background-color: var(--bg-color);
+    }
+  }
+
+  &--unpinned {
+    transform: translateY(-100%);
+
+    @include mq($until: tablet) {
+      transform: none;
+    }
+  }
+
+  &--top {
+    // box-shadow: none;
+    backdrop-filter: none;
+    // background-color: transparent;
+  }
+}
+
+[data-user-color-scheme=dark] {
+  .c-header {
+    background-color: #000;
+  }
+}

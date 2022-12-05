@@ -1,0 +1,25 @@
+/*------------------------------------*\
+  Components > Related
+\*------------------------------------*/
+
+.c-related {
+  .o-grid__col {
+    flex-grow: initial;
+  }
+}
+
+.n-related {
+  &__wrap {
+    background-color: #F9F9F9;
+    padding: 80px 0;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: -0.02;
+
+    margin-bottom: 26px;
+  }
+}

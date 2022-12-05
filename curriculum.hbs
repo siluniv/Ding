@@ -1,0 +1,50 @@
+{{!< default}}
+
+<div class="n-archive__wrap">
+  <div class="n-container mx-auto">
+    <h1 class="c-archive__title">딩딩커리큘럼</h1>
+  </div>
+</div>
+
+{{#if @custom.category_tag_sections}}
+{{#get "tags" filter="slug:[{{@custom.category_tag_sections}}]"}}
+{{#if tags}}
+<div class="n-archive-category__wrap">
+  <div class="n-container mx-auto">
+    <div class="n-archive-category__list">
+      <ul class="o-plain-list">
+        {{#foreach tags}}
+        <li>
+          {{#link href=url activeClass="current"}}{{name}}{{/link}}
+        </li>
+        {{/foreach}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{/if}}
+{{/get}}
+{{/if}}
+
+{{#get "posts" filter="tag:[curriculum]" include="tags,authors" limit=10}}
+{{#if posts}}
+  {{#foreach posts}}
+    <div>{{id}} / {{title}}</div>
+  {{/foreach}}
+{{/if}}
+{{/get}}
+
+{{#get "products" filter="tag:[curriculum]" include="tags,authors" limit=@custom.shop_posts_per_page order="published_at desc"}}
+  {{#if products}}
+<div class="n-container mx-auto">
+  <div class="n-archive__list js-grid">
+  {{#foreach products}}
+    {{> curriculum-card }}
+  {{/foreach}}
+  </div>
+  <div class="n-archive__load">
+    {{ pagination }}
+  </div>
+</div>
+  {{/if}}
+{{/get}}

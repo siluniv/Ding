@@ -1,0 +1,30 @@
+.n-container {
+  width: 358px;
+  padding: 0 16px;
+
+  @include mq($from: tablet) {
+    width: 768px;
+  }
+
+  @include mq($from: desktop) {
+    width: 1032px;
+  }
+
+  &__responsive {
+    width: 100%;
+    @include mq($from: tablet) {
+      max-width: 1032px;
+    }
+  }
+
+  &__mobile-full {
+    @include mq($until: tablet) {
+      padding: 0;
+      width: 100%;
+    }
+  }
+}
+
+.mx-auto {
+  margin: 0 auto;
+}

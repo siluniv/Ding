@@ -1,0 +1,244 @@
+{
+  "name": "dingding",
+  "description": "Education and VOD Theme",
+  "version": "0.0.1",
+  "engines": {
+    "ghost": ">=4.0.0"
+  },
+  "keywords": [
+    "ghost-theme"
+  ],
+  "scripts": {
+    "postinstall": "bower install"
+  },
+  "dependencies": {
+    "@primer/css": "^15.2.0",
+    "animate.css": "^4.1.1",
+    "bower": "^1.8.13",
+    "clipboard": "^2.0.8",
+    "concat": "^3.0.0",
+    "evil-icons": "^1.10.1",
+    "fs": "0.0.2",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-clean-css": "^3.10.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^0.6.1",
+    "gulp-size": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-util": "^3.0.7",
+    "headroom.js": "^0.10.4",
+    "js-cookie": "^3.0.1",
+    "jshint": "^2.12.0",
+    "jshint-stylish": "^2.2.0",
+    "lazysizes": "^5.3.0",
+    "lunr": "^0.7.2",
+    "lunr-languages": "^1.4.0",
+    "normalize.css": "^8.0.1",
+    "prismjs": "^1.23.0",
+    "run-sequence": "^2.2.1",
+    "sass-mq": "^5.0.1",
+    "swiper": "^8.3.2"
+  },
+  "devDependencies": {
+    "dart-sass": "^1.25.0",
+    "gulp": "^4.0.2",
+    "gulp-rtlcss": "^1.4.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-zip": "^4.2.0",
+    "sass": "^1.49.7"
+  },
+  "author": {
+    "name": "Mediasphere",
+    "email": "siluniv@mediasphere.kr"
+  },
+  "config": {
+    "custom": {
+      "shop_point_background_color": {
+        "group": "shop",
+        "type": "color",
+        "default": "#3c7eff",
+        "title": "숍 포인트 배경색"
+      },
+      "shop_point_color": {
+        "group": "shop",
+        "type": "color",
+        "default": "#000000",
+        "title": "숍 포인트 글자색"
+      },
+      "shop_display_status": {
+        "group": "shop",
+        "type": "select",
+        "options": [
+          "on",
+          "off"
+        ],
+        "default": "on",
+        "title": "숍 상품 노출하기",
+        "description": "사이트에서 숍 목록을 표시하려면 on 으로 활성화 하세요."
+      },
+      "shop_posts_per_page": {
+        "group": "shop",
+        "type": "select",
+        "options": [
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16"
+        ],
+        "default": "10",
+        "title": "표시할 숍 상품 수",
+        "description": "숍 목록에 표시할 상품의 수를 선택하세요."
+      },
+      "category_label": {
+        "group": "homepage",
+        "type": "text",
+        "title": "홈 카테고리 라벨"
+      },
+      "category_tag_sections": {
+        "group": "homepage",
+        "type": "text",
+        "title": "홈 카테고리 태그 목록",
+        "description": "카테고리로 노출 시킬 태그의 슬러그(slug)를 따옴표(,)로 구분하여 입력하세요."
+      },
+      "tag_sections_top": {
+        "group": "homepage",
+        "type": "text",
+        "title": "홈 태그 목록 1",
+        "description": "홈에 노출 시킬 태그의 슬러그(slug)를 따옴표(,)로 구분하여 입력하세요."
+      },
+      "tag_sections_bottom": {
+        "group": "homepage",
+        "type": "text",
+        "title": "홈 태그 목록 2",
+        "description": "홈에 노출 시킬 태그의 슬러그(slug)를 따옴표(,)로 구분하여 입력하세요."
+      },
+      "social_youtube": {
+        "group": "header",
+        "type": "text",
+        "title": "유튜브 소셜 링크"
+      },
+      "footer_first_nav_label": {
+        "group": "footer",
+        "type": "text",
+        "title": "네비게이션 라벨(1)",
+        "default": "네비게이션 1",
+        "description": "푸터 첫번째 네비게이션 라벨"
+      },
+      "footer_second_nav_label": {
+        "group": "footer",
+        "type": "text",
+        "title": "네비게이션 라벨(2)",
+        "default": "네비게이션 2",
+        "description": "푸터 두번째 네비게이션 라벨"
+      },
+      "footer_third_nav_label": {
+        "group": "footer",
+        "type": "text",
+        "title": "네비게이션 라벨(3)",
+        "default": "네비게이션 3",
+        "description": "푸터 세번째 네비게이션 라벨"
+      },
+      "site_info_item_1": {
+        "group": "site_info",
+        "type": "text",
+        "title": "사이트 정보(1)",
+        "description": "푸터에 표시할 사이트 정보를 입력하세요."
+      },
+      "site_info_item_2": {
+        "group": "site_info",
+        "type": "text",
+        "title": "사이트 정보(2)",
+        "description": "푸터에 표시할 사이트 정보를 입력하세요."
+      },
+      "site_info_item_3": {
+        "group": "site_info",
+        "type": "text",
+        "title": "사이트 정보(3)",
+        "description": "푸터에 표시할 사이트 정보를 입력하세요."
+      },
+      "site_info_item_4": {
+        "group": "site_info",
+        "type": "text",
+        "title": "사이트 정보(4)",
+        "description": "푸터에 표시할 사이트 정보를 입력하세요."
+      },
+      "site_info_item_5": {
+        "group": "site_info",
+        "type": "text",
+        "title": "사이트 정보(5)",
+        "description": "푸터에 표시할 사이트 정보를 입력하세요."
+      },
+      "site_info_item_6": {
+        "group": "site_info",
+        "type": "text",
+        "title": "사이트 정보(6)",
+        "description": "푸터에 표시할 사이트 정보를 입력하세요."
+      },
+      "site_info_item_7": {
+        "group": "site_info",
+        "type": "text",
+        "title": "사이트 정보(7)",
+        "description": "푸터에 표시할 사이트 정보를 입력하세요."
+      },
+      "site_info_item_8": {
+        "group": "site_info",
+        "type": "text",
+        "title": "사이트 정보(8)",
+        "description": "푸터에 표시할 사이트 정보를 입력하세요."
+      },
+      "site_info_item_9": {
+        "group": "site_info",
+        "type": "text",
+        "title": "사이트 정보(9)",
+        "description": "푸터에 표시할 사이트 정보를 입력하세요."
+      },
+      "site_info_item_10": {
+        "group": "site_info",
+        "type": "text",
+        "title": "사이트 정보(10)",
+        "description": "푸터에 표시할 사이트 정보를 입력하세요."
+      }
+    },
+    "posts_per_page": 12,
+    "image_sizes": {
+      "xxs": {
+        "width": 48
+      },
+      "xs": {
+        "width": 128
+      },
+      "sm": {
+        "width": 176
+      },
+      "md": {
+        "width": 320
+      },
+      "ml": {
+        "width": 588
+      },
+      "lg": {
+        "width": 636
+      },
+      "xl": {
+        "width": 1272
+      },
+      "xxl": {
+        "width": 2640
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+.swiper-container {
+  position: relative;
+}
+
+.goods__swiper .swiper-slide:not(.swiper-slide-active) {
+  visibility: hidden;
+}

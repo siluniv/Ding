@@ -1,0 +1,295 @@
+.d-product {
+  .bluedot-product-wrapper {
+    position: relative;
+  }
+
+  .bluedot-product-wrap {
+    padding: 0 16px;
+    max-width: 800px;
+
+    // @include mq($from: tablet) {
+    //   max-width: 1036px;
+    // }
+
+    .bluedot-product-header {
+      display: block;
+
+      @include mq($from: landscape) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .bluedot-product-cover {
+        margin-bottom: 24px;
+      }
+
+      .bluedot-product-info {
+        width: auto;
+      }
+    }
+
+  }
+
+  .bluedot-product-chapters {
+    &+ script + .bluedot-product-wrap {
+
+      @include mq($from: tablet) {
+        margin: 0 auto;
+      }
+
+      .bluedot-product-cover {
+        display: none;
+      }
+
+      .bluedot-product-info {
+        position: absolute;
+        top: 246px;
+        left: 16px;
+
+        @include mq($from: tablet) {
+          top: 526px;
+          left: auto;
+          width: 800px;
+        }
+
+        h2 {
+          color: #fff;
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: -0.02;
+
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+        }
+
+        .bluedot-product-buttons {
+          display: none;
+        }
+      }
+
+      .bluedot-product-detail {
+        margin-top: 0;
+        border-top: 0;
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+
+
+    }
+  }
+
+  .n-container {
+    width: 100%;
+    padding: 0;
+  }
+
+  .bluedot-product-chapters {
+    margin: 0;
+    display: block;
+    height: auto;
+    position: relative;
+
+    .bluedot-product-chapter-main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+      height: auto;
+      padding-bottom: 108px;
+
+      background-color: #2F3659;
+      @include mq($from: tablet) {
+        padding: 56px 0 108px;
+      }
+    }
+
+    .bluedot-product-chapter-main-content {
+
+      background-color: #000;
+      position: relative;
+
+      @include mq($from: tablet) {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .video-js {
+        max-width: 390px;
+        margin: 0 auto;
+        height: auto;
+        position: relative;
+        aspect-ratio: 16 / 9;
+
+        @include mq($from: tablet) {
+          max-width: none;
+        }
+      }
+    }
+
+    .bluedot-product-chapter-sidebar {
+      width: 100%;
+      height: auto;
+      padding: 30px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #5E96FF;
+      line-height: 15px;
+      letter-spacing: -0.02;
+
+      &::before {
+        content: "커리큘럼 목록";
+        display: block;
+        margin-bottom: 12px;
+
+        @include mq($from: tablet) {
+          max-width: 800px;
+          margin: 0 auto;
+          text-align: center;
+          margin-bottom: 16px;
+        }
+      }
+    }
+
+    .bluedot-product-chapter-sidebar-content {
+      @include mq($from: tablet) {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+    }
+
+    &+.bluedot-product-wrap {
+      padding: 64px 0;
+
+      .bluedot-product-content-wrap {
+        max-width: 720px;
+      }
+    }
+
+    .bluedot-product-chapter-list {
+      ul {
+        li {
+          position: relative;
+
+          // &::before {
+          //   content: '';
+          //   display: block;
+          //   position: absolute;
+          //   right: 0;
+          //   top: 50%;
+          //   margin-top: -5px;
+          //   height: 5px;
+          //   width: 65px;
+          //   background-color: #525784;
+          //   z-index: 1;
+          // }
+
+          // &::after {
+          //   content: '';
+          //   display: block;
+          //   position: absolute;
+          //   right: 0;
+          //   top: 50%;
+          //   margin-top: -5px;
+          //   height: 5px;
+          //   width: 87px;
+          //   background-color: #8DA6FF;
+          // }
+
+          span.no {
+            position: relative;
+            left: auto;
+            top: auto;
+            transform: none;
+          }
+          span.title {
+            opacity: 0.5;
+            margin-left: 0;
+            height: auto;
+
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+            word-break: break-word;
+          }
+
+          a {
+            display: flex;
+            align-items: center;
+            column-gap: 14px;
+            margin-right: 105px;
+            &:hover {
+              background: none;
+            }
+          }
+
+          a.active {
+            background: none;
+
+            .title {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+
+
+
+
+}
+
+.n-product {
+  padding: 24px 0;
+
+  @include mq($from: tablet) {
+    padding-top: 42px;
+  }
+
+  .bluedot-product {
+    &-wrapper {
+      padding: 0 16px;
+
+      @include mq($from: tablet) {
+        padding: 0;
+      }
+    }
+
+    &-wrap {
+      margin: 0;
+    }
+
+    &-header {
+      display: flex;
+      flex-direction: column;
+
+      @include mq($from:landscape) {
+        flex-direction: row;
+      }
+    }
+
+    &-cover {
+      border-radius: 4px;
+      overflow: hidden;
+    }
+  }
+
+  .bluedot-product-wrap .bluedot-product-header .bluedot-product-info {
+    width: auto;
+    margin-top: 24px;
+
+    @include mq($from:landscape) {
+      width: 320px;
+    }
+  }
+
+  .bluedot-product-wrap .bluedot-product-detail .bluedot-product-content {
+    margin-bottom: 42px;
+  }
+}

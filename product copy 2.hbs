@@ -1,0 +1,203 @@
+{{!< default}}
+
+{{#if product.payment.is_online_class}}
+  {{#product}}
+  {{#if payment_status.is_paid}}
+<div class="n-product">
+  <div class="n-container n-container__mobile-full mx-auto">
+
+    <div>
+      <link rel="stylesheet" href="{{asset "public/video.css" hasMinFile="true"}}"/>
+      <script type="text/javascript" src="{{asset "public/video.js" hasMinFile="true"}}"></script>
+
+
+      {{#if payment.purchase.chapters}}
+                <div class="bluedot-product-chapters">
+                    <div class="bluedot-product-chapter-main">
+                        <div class="bluedot-product-chapter-main-content">
+                            <video id="video-for-chapter" class="vjs-default-skin vjs-big-play-centered" controls preload="auto"></video>
+                        </div>
+                    </div>
+                    <div class="bluedot-product-chapter-sidebar">
+                        <div class="bluedot-product-chapter-sidebar-content">
+                            {{#each payment.purchase.chapters as |chapter|}}
+                            <div class="bluedot-product-chapter-header">
+                                <h3>{{chapter.title}}</h3>
+                                <span>{{chapter.lessons.length}}개 수업</span>
+                            </div>
+
+                            <div class="bluedot-product-chapter-list chapter-index-{{chapter.index}}">
+                                <ul>
+                                {{#each lessons as |lesson|}}
+                                    <li class="lesson-index-{{lesson.index}} no-have-cover">
+                                        <a href="#" class="lesson-link" data-video-uuid="{{lesson.media_uuid}}" data-video="{{lesson.url}}" data-video-view-current="{{lesson.media_info.view_current}}" data-video-view-percent="{{lesson.media_info.view_percent}}">
+                                            <span class="no">{{lesson.index}}</span>
+                                            <span class="title"><span>{{lesson.title}}</span></span>
+
+                                            {{#if lesson.media_info}}
+                                            <span class="progress"><span class="now" style="width:{{lesson.media_info.view_percent}}%"></span></span>
+                                            {{/if}}
+                                        </a>
+                                    </li>
+                                {{/each}}
+                                </ul>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+
+
+      {{bluedot_product_script VIDEOJS='video-for-chapter'}}
+    </div>
+
+  </div>
+</div>
+
+  {{else}}
+<div class="n-product">
+  <div class="n-container n-container__mobile-full mx-auto">
+    <div class="bluedot-product-wrapper">
+      <div class="bluedot-product-wrap">
+
+        <div class="bluedot-product-header {{#if feature_image}}have-product-cover{{else}}not-have-product-cover{{/if}}">
+
+          <div class="bluedot-product-cover">
+            <img src="{{#if feature_image}}{{ feature_image }}{{else}}//storage.googleapis.com/cdn.media.bluedot.so/img/default_product_cover.png{{/if}}" class="cover{{#unless feature_image}} default-cover{{/unless}}" />
+          </div>
+
+          <div class="bluedot-product-info">
+            {{#if payment.type}}
+            <div class="bluedot-product-type">{{payment.type_text}}</div>
+            {{/if}}
+            <h2>{{title}}</h2>
+            {{#if custom_excerpt}}
+            <p>{{ custom_excerpt }}</p>
+            {{/if}}
+
+            <div class="bluedot-product-price-wrap">
+              {{#if payment.have_price_sale}}
+              <div class="bluedot-product-price">
+                <div class="bluedot-product-price-label">무료회원 {{#if payment.have_price_original}}할인가{{else}}판매가{{/if}}</div>
+                <div class="bluedot-product-price-value">
+                {{#if @member.paid}}
+                  <i>{{price payment.price currency="KRW"}}</i>
+                {{else}}
+                  {{price payment.price currency="KRW"}}
+                {{/if}}
+                </div>
+              </div>
+
+              <div class="bluedot-product-price bluedot-product-price-for-subscriber">
+                <div class="bluedot-product-price-label">유료구독회원 할인가</div>
+                <div class="bluedot-product-price-value">{{price payment.price_sale currency="KRW"}}</div>
+              </div>
+
+              <div class="bluedot-product-price bluedot-product-final-price">
+                <div class="bluedot-product-price-label">결제금액</div>
+                <div class="bluedot-product-price-value">
+                {{#if @member.paid}}
+                  {{price payment.price_sale currency="KRW"}}
+                {{else}}
+                  {{price payment.price currency="KRW"}}
+                {{/if}}
+                </div>
+              </div>
+              {{else}}
+                {{#unless payment.is_stop_selling}}
+                  {{#if payment.have_price_original}}
+              <div class="bluedot-product-price">
+                <div class="bluedot-product-price-label">판매가</div>
+                <div class="bluedot-product-price-value">
+                  <i>{{price payment.price_original currency="KRW"}}</i>
+                </div>
+              </div>
+
+              <div class="bluedot-product-price">
+                <div class="bluedot-product-price-label">무료회원 할인가</div>
+                <div class="bluedot-product-price-value">
+                  <span class="bluedot-product-price-percent">{{payment.price_original_sale_percent}}<span class="symbol">%</span></span>
+                  {{price payment.price currency="KRW"}}
+                </div>
+              </div>
+
+              <div class="bluedot-product-price bluedot-product-final-price">
+                <div class="bluedot-product-price-label">결제금액</div>
+                <div class="bluedot-product-price-value">{{price payment.price currency="KRW"}}</div>
+              </div>
+                  {{else}}
+              <div class="bluedot-product-price">
+                <div class="bluedot-product-price-label">판매가</div>
+                <div class="bluedot-product-price-value">{{price payment.price currency="KRW"}}</div>
+              </div>
+                  {{/if}}
+                {{/unless}}
+              {{/if}}
+            </div>
+
+            <div class="bluedot-product-buttons">
+            {{#if payment.is_selling}}
+              {{#if (eq payment.type "webinar")}}
+                {{#if payment.price_final}}
+              <a class="gh-button gh-button-buy" href="#" data-portal="product" data-product-uuid="{{ uuid }}">결제하기</a>
+                {{else}}
+              <a class="gh-button gh-button-buy" href="#" data-portal="product" data-product-uuid="{{ uuid }}">등록하기</a>
+                {{/if}}
+              {{else}}
+              <a class="gh-button gh-button-buy" href="#" data-portal="product" data-product-uuid="{{ uuid }}">결제하기</a>
+              {{/if}}
+            {{else}}
+              {{#if payment.is_stop_selling}}
+            <a class="gh-button gh-button-buy disabled" href="#">판매 종료</a>
+              {{/if}}
+              {{#if payment.is_soldout}}
+            <a class="gh-button gh-button-buy disabled" href="#">품절</a>
+              {{/if}}
+            {{/if}}
+            </div>{{!-- buttons --}}
+          </div>{{!-- info --}}
+        </div>{{!-- header --}}
+
+        <div class="bluedot-product-detail">
+          <div class="bluedot-product-content-wrap">
+            {{#if payment.have_require_message}}
+            <div class="bluedot-product-require-message bluedot-markdown">
+              {{markdown payment.require_message}}
+            </div>
+            {{/if}}
+            <div class="bluedot-product-content ">
+              <div class="c-content">{{ content }}</div>
+            </div>
+          </div>{{!-- bluedot-product-content-wrap --}}
+        </div>{{!-- bluedot-product-detail --}}
+
+      </div>{{!-- bluedot-product-wrap --}}
+    </div>{{!-- bluedot-product-wrapper --}}
+    <script>
+    function downloadURI(uri, name) {
+      var link = document.createElement("a");
+      link.setAttribute('download', name);
+      link.href = uri;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }
+    </script>
+  </div>{{!-- n-container --}}
+</div>
+  {{/if}}
+  {{/product}}
+{{else}}
+<div class="n-product">
+  <div class="n-container n-container__mobile-full mx-auto">
+    {{bluedot_product}}
+  </div>
+</div>
+{{/if}}
+
+
+
+
+
+

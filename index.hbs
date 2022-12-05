@@ -1,0 +1,296 @@
+{{!< default}}
+
+{{#get "products" filter="featured:true+tag:[goods]" include="tags" limit=@custom.shop_posts_per_page order="published_at desc"}}
+  {{#if products}}
+<div class="n-featured n-featured__goods">
+  <div class="n-container n-container__responsive mx-auto">
+    <div class="goods__swiper swiper-container">
+      <div class="swiper-controller">
+        <div class="swiper-button swiper-button-prev">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button swiper-button-next">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="swiper-wrapper">
+
+        {{#foreach products}}
+        <div class="swiper-slide">
+          <div class="goods-card">
+            <div class="goods-card__content">
+              <div class="goods-card__badge">
+                {{#primary_tag}}
+                <a href="{{url}}">{{name}}</a>
+                {{/primary_tag}}
+              </div>
+              <div class="goods-card__text">
+                <h1 class="goods-card__title">
+                  <a href="{{url}}">{{ title }}</a>
+                </h1>
+                <p class="goods-card__description">{{excerpt}}</p>
+              </div>
+            </div>
+            <div class="goods-card__media">
+              <a href="#">
+              {{#if feature_image}}
+                <img class="goods-card__image" src="{{img_url feature_image}}" alt="{{#if feature_image_alt}}{{ feature_image_alt }}{{ else }}{{ title }}{{/if}}">
+              {{/if}}
+              </a>
+            </div>
+          </div>
+        </div>
+        {{/foreach}}
+
+      </div>
+    </div>
+  </div>
+</div>
+  {{/if}}
+{{/get}}
+
+<div class="n-featured n-featured__category">
+  <div class="n-container mx-auto">
+    <div class="n-featured__category--title">
+      <img src="{{asset "img/icon/notebook.png"}}" alt="">
+      {{#if @custom.category_label}}
+      {{@custom.category_label}}
+      {{else}}
+      카테고리
+      {{/if}}
+    </div>
+    <div class="n-featured__category--list">
+      <ul class="o-plain-list">
+        {{navigation type="secondary"}}
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="n-container n-container__responsive mx-auto">
+  <div class="n-tag-sections">
+{{#if @custom.tag_sections_top}}
+{{#get "tags" filter="slug:[{{@custom.tag_sections_top}}]"}}
+{{#if tags}}
+
+  {{#foreach tags}}
+    <div class="n-tag-section">
+      <div class="n-tag-section__head">
+        <div class="n-tag-section__label">{{description}} {{ name }}</div>
+        <div class="n-tag-section__more">
+          {{#link href=slug}}
+            <span>더보기</span>
+            <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.52821 3.98459C3.49721 3.96858 3.4678 3.95014 3.44031 3.92949C2.36557 2.95028 1.29118 1.97086 0.217138 0.99123C0.0276006 0.818428 -0.0493133 0.619957 0.0324076 0.380476C0.152929 0.0279851 0.647718 -0.116643 0.970825 0.10656C1.01372 0.136687 1.05433 0.169422 1.09238 0.204543L4.77531 3.56322C5.07472 3.83651 5.07507 4.16208 4.77531 4.43537C3.54606 5.55692 2.31647 6.67836 1.08654 7.79969C0.852021 8.0135 0.575268 8.05764 0.308816 7.92491C0.233693 7.88581 0.168515 7.83264 0.117584 7.76889C0.0666521 7.70515 0.031124 7.63229 0.013343 7.55511C-0.004438 7.47793 -0.00406765 7.39819 0.0144296 7.32115C0.0329269 7.24411 0.069131 7.17152 0.120653 7.10817C0.156099 7.06734 0.194285 7.02855 0.234993 6.99203L3.44443 4.06379C3.46709 4.04406 3.48769 4.02309 3.52821 3.98459Z" fill="black"/>
+            </svg>
+          {{/link}}
+        </div>
+      </div>
+
+      <div class="n-tag-section__articles n-grid n-grid__col n-grid__col--post">
+      {{#get "posts" filter="tags:{{slug}}" include="tags,authors" limit="3" as |posts|}}
+      {{#if posts}}
+        {{#foreach posts}}
+          {{#unless @last}}
+          {{> post-card }}
+          {{/unless}}
+        {{/foreach}}
+      {{/if}}
+      {{/get}}
+
+      {{#get "products" filter="tags:{{slug}}" include="tags,authors" limit="1"}}
+      {{#if products}}
+        {{#foreach products}}
+          {{> product-card-home }}
+        {{/foreach}}
+      {{/if}}
+      {{/get}}
+
+      {{#get "posts" filter="tags:{{slug}}" include="tags,authors" limit="3" as |posts|}}
+      {{#if posts}}
+        {{#foreach posts}}
+          {{#if @last}}
+          {{> post-card }}
+          {{/if}}
+        {{/foreach}}
+      {{/if}}
+      {{/get}}
+      </div>
+    </div>
+  {{/foreach}}
+{{/if}}
+{{/get}}
+{{/if}}
+  </div>
+</div>
+
+<div class="n-container n-container__responsive mx-auto">
+  <div class="n-featured n-featured__promotion">
+    <div class="n-featured__promotion--wrap">
+
+      <div class="n-featured__promotion--item">
+        <div class="n-featured__label">딩딩클래스</div>
+        <div class="n-featured__promotion--content n-featured__promotion--content-gradient">
+          <div class="n-featured__promotion--text">
+            <div class="n-featured__promotion--tag">청소년을 위한 참여형 콘서트</div>
+            <div class="n-featured__promotion--title">딩딩클래스</div>
+          </div>
+          <div class="n-featured__promotion--action">
+            {{#link href="/class/"}}참여신청 GO! GO!{{/link}}
+          </div>
+        </div>
+      </div>
+      <div class="n-featured__promotion--item">
+        <div class="n-featured__label">딩딩굿즈숍</div>
+        <div class="n-featured__promotion--content">
+          <div class="n-featured__promotion--text">
+            <div class="n-featured__promotion--tag">청소년을 위한 참여형 콘서트</div>
+            <div class="n-featured__promotion--title">딩딩굿즈숍</div>
+          </div>
+          <div class="n-featured__promotion--action">
+            {{#link href="/shop/"}}스토어 바로가기{{/link}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="n-container n-container__responsive mx-auto">
+  <div class="n-tag-sections">
+{{#if @custom.tag_sections_bottom}}
+{{#get "tags" filter="slug:[{{@custom.tag_sections_bottom}}]"}}
+{{#if tags}}
+
+  {{#foreach tags}}
+    <div class="n-tag-section">
+      <div class="n-tag-section__head">
+        <div class="n-tag-section__label">{{description}} {{ name }}</div>
+        <div class="n-tag-section__more">
+          {{#link href=slug}}
+            <span>더보기</span>
+            <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.52821 3.98459C3.49721 3.96858 3.4678 3.95014 3.44031 3.92949C2.36557 2.95028 1.29118 1.97086 0.217138 0.99123C0.0276006 0.818428 -0.0493133 0.619957 0.0324076 0.380476C0.152929 0.0279851 0.647718 -0.116643 0.970825 0.10656C1.01372 0.136687 1.05433 0.169422 1.09238 0.204543L4.77531 3.56322C5.07472 3.83651 5.07507 4.16208 4.77531 4.43537C3.54606 5.55692 2.31647 6.67836 1.08654 7.79969C0.852021 8.0135 0.575268 8.05764 0.308816 7.92491C0.233693 7.88581 0.168515 7.83264 0.117584 7.76889C0.0666521 7.70515 0.031124 7.63229 0.013343 7.55511C-0.004438 7.47793 -0.00406765 7.39819 0.0144296 7.32115C0.0329269 7.24411 0.069131 7.17152 0.120653 7.10817C0.156099 7.06734 0.194285 7.02855 0.234993 6.99203L3.44443 4.06379C3.46709 4.04406 3.48769 4.02309 3.52821 3.98459Z" fill="black"/>
+            </svg>
+          {{/link}}
+        </div>
+      </div>
+
+      <div class="n-tag-section__articles n-grid n-grid__col n-grid__col--post">
+      {{#get "posts" filter="featured:true+tags:{{slug}}" include="tags,authors" limit="3" as |posts|}}
+      {{#if posts}}
+        {{#foreach posts}}
+          {{> post-card }}
+        {{/foreach}}
+      {{/if}}
+      {{/get}}
+      </div>
+    </div>
+  {{/foreach}}
+{{/if}}
+{{/get}}
+{{/if}}
+  </div>
+</div>
+
+{{#get "products" filter="featured:true+tag:[live]" include="tags" limit="1" order="published_at desc"}}
+  {{#if products}}
+  {{#foreach products}}
+<div class="n-featured n-featured__live">
+  <div class="n-container n-container__responsive mx-auto">
+    <div class="n-featured__live--wrap">
+
+      <div class="n-featured__live--content">
+        <div class="n-featured__live--badge">
+          {{#link href="/tag/live/"}}<img src="{{asset "img/icon/live.png"}}" alt="">{{/link}}
+        </div>
+        <div class="n-featured__live--text">
+          <h1 class="n-featured__live--title">
+            <a href="{{ url }}">{{ title }}</a>
+          </h1>
+          <p class="n-featured__live--excerpt">{{ excerpt }}</p>
+        </div>
+        <div class="n-featured__live--action">
+          <a href="{{ url }}">바로가기</a>
+        </div>
+      </div>
+      <div class="n-featured__live--media">
+        <a href="{{url}}">
+        {{#if feature_image}}
+          <img src="{{ img_url feature_image}}" alt="{{#if feature_image_alt}}{{ feature_image_alt }}{{ else }}{{ title }}{{/if}}">
+        {{/if}}
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+  {{/foreach}}
+  {{/if}}
+{{/get}}
+
+
+
+{{#get "products" filter="featured:true+tag:[books]" include="tags,authors" limit=@custom.shop_posts_per_page order="published_at desc"}}
+  {{#if products}}
+<div class="n-books">
+  <div class="n-container mx-auto">
+
+    <div class="n-books__label">
+      {{#link href="/shop/digital-book/"}}
+        <img src="{{asset "img/icon/book.png"}}" alt="">
+        <span>BOOKS</span>
+      {{/link}}
+    </div>
+    <div class="n-books__list">
+      <div class="n-books__swiper swiper-container">
+        <div class="swiper-wrapper">
+
+          {{#foreach products}}
+          <div class="swiper-slide" data-history="1">
+            <article class="n-books-item">
+              <div class="n-books-item__media">
+                <a href="{{ url }}">
+                {{#if feature_image}}
+                  <img src="{{ img_url feature_image size="lg"}}" alt="{{#if feature_image_alt}}{{ feature_image_alt }}{{ else }}{{ title }}{{/if}}">
+                {{/if}}
+                </a>
+              </div>
+              <div class="n-books-item__content">
+                <h2 class="n-books-item__title"><a href="{{ url }}">{{ title }}</a></h2>
+                {{#primary_author}}
+                <div class="n-books-item__author">
+                  <a href="{{url}}">{{name}}</a>
+                </div>
+                {{/primary_author}}
+              </div>
+            </article>
+          </div>
+          {{/foreach}}
+
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+      <div class="swiper-button-prev text-white">
+        <svg width="20" height="33" viewBox="0 0 20 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.00477 16.4836C7.28017 16.6754 7.54543 16.8813 7.79947 17.1006C11.3929 20.6856 14.9831 24.2723 18.5698 27.8607C19.3518 28.6402 19.8164 29.5161 19.5396 30.6536C19.4398 31.1053 19.2244 31.5234 18.9145 31.867C18.6047 32.2106 18.211 32.4678 17.7719 32.6137C17.3329 32.7595 16.8635 32.7889 16.4096 32.699C15.9558 32.6091 15.5331 32.403 15.1828 32.1008C14.9887 31.9414 14.8031 31.7719 14.6267 31.593C10.3613 27.3326 6.09837 23.0714 1.83799 18.8093C0.258748 17.2326 0.261287 15.7905 1.83799 14.2087C6.14407 9.90266 10.4518 5.59658 14.7613 1.29049C15.8277 0.226669 17.0108 -0.0145304 18.1457 0.57959C18.5015 0.759119 18.8125 1.01604 19.0559 1.33148C19.2994 1.64693 19.4691 2.01289 19.5526 2.4025C19.6362 2.79211 19.6314 3.19549 19.5386 3.58301C19.4459 3.97053 19.2675 4.33236 19.0166 4.64193C18.8281 4.87027 18.6272 5.08809 18.4149 5.29444C14.8603 8.84899 11.3007 12.4035 7.73599 15.9581C7.50423 16.1494 7.25994 16.3249 7.00477 16.4836Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="swiper-button-next text-white">
+        <svg width="20" height="33" viewBox="0 0 20 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.9952 16.5164C12.7198 16.3246 12.4546 16.1187 12.2005 15.8994C8.60705 12.3144 5.01695 8.72766 1.43024 5.13926C0.648237 4.3598 0.183621 3.48386 0.460368 2.3464C0.560239 1.89466 0.775624 1.47657 1.08547 1.133C1.39532 0.789435 1.78901 0.532154 2.22807 0.386313C2.66713 0.240472 3.13653 0.21106 3.59036 0.300958C4.04419 0.390856 4.46692 0.596984 4.81722 0.899189C5.01133 1.0586 5.19693 1.2281 5.37326 1.40698C9.63872 5.66736 13.9016 9.92859 18.162 14.1907C19.7413 15.7674 19.7387 17.2095 18.162 18.7913C13.8559 23.0973 9.54815 27.4034 5.23868 31.7095C4.17231 32.7733 2.98917 33.0145 1.85425 32.4204C1.49852 32.2409 1.18751 31.984 0.944058 31.6685C0.700605 31.3531 0.530885 30.9871 0.447361 30.5975C0.363838 30.2079 0.368631 29.8045 0.461386 29.417C0.554142 29.0295 0.732511 28.6676 0.983389 28.3581C1.17189 28.1297 1.37277 27.9119 1.58512 27.7056C5.13967 24.151 8.6993 20.5965 12.264 17.0419C12.4958 16.8506 12.7401 16.6751 12.9952 16.5164Z" fill="white"/>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</div>
+  {{/if}}
+{{/get}}

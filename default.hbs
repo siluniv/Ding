@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang='{{ @site.locale }}'>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+
+  <title>{{ meta_title }}</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+  <script src="{{asset "js/lib.js" }}"></script>
+  <script>
+  var mmb = {
+    {{#if @member}}
+    active: true,
+      {{#if @member.paid}}
+    paid: true,
+      {{else}}
+    paid: false,
+      {{/if}}
+    {{else}}
+    active: false,
+    {{/if}}
+  };
+  </script>
+  {{> fonts }}
+  {{> compiled/inline-css }}
+  {{> dark-mode-js }}
+
+  <script>
+    var site_url                            = '{{ @site.url }}',
+        pagination_next_page_number         = '{{ pagination.next }}',
+        pagination_available_pages_number   = '{{ pagination.pages }}',
+        pagination_loading_text             = '{{t "Loading" }}',
+        pagination_more_posts_text          = '{{t "More Posts" }}',
+        clipboard_copied_text               = '{{t "Link copied to clipboard" }}';
+  </script>
+
+  <link rel="stylesheet" href="{{asset "public/bluedot.css" hasMinFile="true"}}"/>
+  {{> css/default }}
+
+  <script type="text/javascript">
+    wow = new WOW(
+                      {
+                      boxClass:     'wow',      // default
+                      animateClass: 'animate__animated', // default
+                      offset:       0,          // default
+                      mobile:       true,       // default
+                      live:         true        // default
+                    }
+                    )
+                    wow.init();
+    var bluedot_user_id = {{#if @member}}'{{@member.uuid}}'{{else}}null{{/if}};
+  </script>
+  {{ ghost_head }}
+</head>
+<body class='{{ body_class }}'>
+
+  <div class='c-site-container'>
+    {{> header }}
+
+    {{{ body }}}
+
+    {{!-- {{> custom_footer}} --}}
+    {{> dingding-footer}}
+
+    <div>
+      <div class="o-grid">
+        <div class="o-grid__col o-grid__col--full">
+          {{!-- {{ bluedot_footer }} --}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src='{{ asset 'js/app.min.js' }}'></script>
+
+  {{{block "scripts"}}}
+
+  {{ ghost_foot }}
+</body>
+</html>
